@@ -78,7 +78,7 @@ start
   mov  r1,#TimerResetAllInterrupts
   str  r1,[r0,#IR]
 
-  ldr  r1,=(14745600/1600)-1   ; 1 / 1600 = 1us
+  ldr  r1,=(14745600/1600) - 1   ; 1 / 1600 = 1us
   str  r1,[r0,#MR0]
 
   mov  r1,#TimerModeResetAndInterrupt
@@ -92,19 +92,24 @@ start
   ;
   ; main
   ;
+
+  
   ldr r0, =counter
   ldr r4, =table
   ldr r6, =IO0CLR
   ldr r7, =IO0SET
+  ldr r8, =800
 while_true                  ; while(true) {
   mov r2, #0
 fori
   cmp r2, #TABLE_LEN        ;   for (int i = 0; i < TABLE_LEN; i++)
   bhs efori                 ;   {
-  mov r1, #0                ;     counter = 0
+  mov r1, #0
+  str r1, [r0] 				;     counter = 0
 while_not_800               ;     while(counter < 800)
-  cmp r1, #800              ;     {
+                            ;     {
   ldr r1, [r0]              ;       read(counter)
+  cmp r1, r8
   blo while_not_800         ;     }
   ldr r3, [r4, r2, lsl #2]  ;     table_entry = table[i]
   ldr r5, =0x00260000       ;     mask = P0.21, P0.18-P0.17

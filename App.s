@@ -104,8 +104,8 @@ while_true                  ; while(true) {
 fori
   cmp r2, #TABLE_LEN        ;   for (int i = 0; i < TABLE_LEN; i++)
   bhs efori                 ;   {
-  mov r1, #0
-  str r1, [r0] 				;     counter = 0
+  str r1, [r0] 				;     counter -= 800
+  sub r1, r8
 while_not_800               ;     while(counter < 800)
                             ;     {
   ldr r1, [r0]              ;       read(counter)

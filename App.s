@@ -93,7 +93,7 @@ start
   ; main
   ;
 
-  
+
   ldr r0, =counter
   ldr r4, =table
   ldr r6, =IO0CLR
@@ -104,13 +104,13 @@ while_true                  ; while(true) {
 fori
   cmp r2, #TABLE_LEN        ;   for (int i = 0; i < TABLE_LEN; i++)
   bhs efori                 ;   {
-  str r1, [r0] 				;     counter -= 800
-  sub r1, r8
 while_not_800               ;     while(counter < 800)
                             ;     {
   ldr r1, [r0]              ;       read(counter)
   cmp r1, r8
   blo while_not_800         ;     }
+  sub r1, r8                ;     counter -= 800
+  str r1, [r0]
   ldr r3, [r4, r2, lsl #2]  ;     table_entry = table[i]
   ldr r5, =0x00260000       ;     mask = P0.21, P0.18-P0.17
   str r5, [r7]              ;     turn_off_leds(mask)

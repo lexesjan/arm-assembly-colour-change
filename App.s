@@ -78,7 +78,7 @@ start
   mov  r1,#TimerResetAllInterrupts
   str  r1,[r0,#IR]
 
-  ldr  r1,=(14745600/1600) - 1   ; 1 / 1600 = 1us
+  ldr  r1,=(14745600/1600) - 1   ; 1 / 1600 = 625us
   str  r1,[r0,#MR0]
 
   mov  r1,#TimerModeResetAndInterrupt
